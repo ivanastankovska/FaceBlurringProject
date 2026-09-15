@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Face Blur App</title>
+    <style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    margin: 0;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #888;
+    margin-bottom: 2rem;
+  }
+
+  form {
+    background: #fff;
+    border: 0.5px solid #e0ddd5;
+    border-radius: 12px;
+    padding: 1.75rem;
+    max-width: 440px;
+    margin: 0 auto 2rem;
+  }
+
+  input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 2rem;
+    border: 1.5px dashed #ccc;
+    border-radius: 8px;
+    text-align: center;
+    background: #f9f8f5;
+    cursor: pointer;
+    margin-bottom: 1.25rem;
+    font-size: 13px;
+    color: #666;
+  }
+
+  select {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+    color: #1a1a1a;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+    margin-bottom: 1.25rem;
+  }
+
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  button[type="submit"]:hover { opacity: 0.8; }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .container > div {
+    background: #fff;
+    border: 0.5px solid #e0ddd5;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 12px 16px;
+    border-bottom: 0.5px solid #e8e6df;
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  a button,
+  a > button {
+    display: block;
+    width: calc(100% - 32px);
+    margin: 12px 16px;
+    padding: 9px;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    border: 0.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  a > button:hover { background: #ece9e3; }
+</style>
+</head>
+<body>
+
+<h1>Face Blurring App</h1>
+
+<h2>Upload an Image</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required><br><br>
+
+    <select name="method">
+        <option value="blur">Blur</option>
+        <option value="pixel">Pixelate</option>
+    </select><br><br>
+
+    <button type="submit">Process</button>
+</form>
+
+{% if original_image and processed_image %}
+    <div class="container">
+        <div>
+            <h3>Original</h3>
+            <img src="{{ original_image }}">
+        </div>
+
+        <div>
+            <h3>Processed</h3>
+            <img src="{{ processed_image }}">
+            <br><br>
+            <a href="{{ processed_image }}" download>
+                <button>Download</button>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+</body>
+</html>
